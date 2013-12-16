@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Script for adding an external display. You may need to adjust
+# the PRIMARY and EXTERNAL variables to suit your computer
+
+# By default it will try to maximize resolutions on your display.
+# It may not work if the display mode isn't listed with a + ...
+
+# To see what you need to set the variables below to use `xrandr -q'
+
+PRIMARY="LVDS"
+EXTERNAL="VGA-0"
+
+if [ ! $# -eq 1 ]; then
+    echo "USAGE: adext <above|below|right-of|left-of>"
+    exit -1
+fi
+
+OPMODES=(`xrandr -q | grep -E "[0-9]{1,2}\.[0-9](\*| )\+" | awk '{print $1}'`)
+
+xrandr -q | grep $EXTERNAL | grep disconnected > /dev/null
+if [ $? -eq 0 ]; then
+    echo "No external display found, running xrandr --auto"
+    xrandr --auto
+    exit -1;
+else
+    echo "Setting..."
+    echo "(P)$PRIMARY: ${OPMODES[1]}"
+    echo "$EXTERNAL: ${OPMODES[0]}"
+    
+    xrandr --output $PRIMARY --mode ${OPMODES[1]}
+    xrandr --output $PRIMARY --primary
+    xrandr --output $EXTERNAL --mode ${OPMODES[0]}
+    xrandr --output $EXTERNAL --$1 $PRIMARY 
+fi
