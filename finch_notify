@@ -5,4 +5,9 @@
 
 latest_line=`find ~/.purple/logs/jabber -mtime -1 -printf "%T@ %Tx %TX %p\n" | sort -n -r | head | cut -d ' ' -f 2- | awk '{print $NF}' | head -1 | xargs tail -1 | sed -e 's#<[^>]*>##g'`
 echo $latest_line
+
 twmnc -t "`echo $latest_line | cut -d ':' -f 3 | awk -F ')' '{print $2}'`" -c "`echo $latest_line | cut -d ':' -f 4-`"
+# I'm using twmnd for notifications. Replace with the following
+# for stock notify_osd
+
+# notify_send "`echo $latest_line | cut -d ':' -f 3 | awk -F ')' '{print $2}'`" "`echo $latest_line | cut -d ':' -f 4-`"
