@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Later make it search in user defined dirs, not just rel
+# ... maybe ...
+
+if [ ! -e var/capswitch ]; then
+    echo "Cannot locate switch file"
+    exit 1
+fi
+
+xmodmap -pke | grep Caps_Lock | grep 37 > /dev/null
+
+if [ $? -eq 0 ]; then
+    echo "Already swapped"
+    exit 0
+else
+    xmodmap var/capswitch
+    echo "Done"
+fi
+
+
+    
