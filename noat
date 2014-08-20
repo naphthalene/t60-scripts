@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo 'export XAUTHORITY=/home/psadikov/.Xauthority;export DISPLAY=":0";notify-send "${*:2}"' | at $1
+

@@ -1,9 +1,11 @@
 #!/bin/bash
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # Later make it search in user defined dirs, not just rel
 # ... maybe ...
 
-if [ ! -e var/capswitch ]; then
+if [ ! -e $DIR/var/capswitch ]; then
     echo "Cannot locate switch file"
     exit 1
 fi
@@ -14,7 +16,7 @@ if [ $? -eq 0 ]; then
     echo "Already swapped"
     exit 0
 else
-    xmodmap var/capswitch
+    xmodmap $DIR/var/capswitch
     echo "Done"
 fi
 

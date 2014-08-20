@@ -8,9 +8,9 @@
 
 # To see what you need to set the variables below to use `xrandr -q'
 
-PRIMARY="LVDS"
-EXTERNAL="VGA-0"
-
+PRIMARY="eDP1"
+# EXTERNAL="HDMI1"
+EXTERNAL="DP1"
 
 OPMODES=(`xrandr -q | grep -E "[0-9]{1,2}\.[0-9](\*| )\+" | awk '{print $1}'`)
 
@@ -26,9 +26,9 @@ else
     echo "Setting..."
     echo "(P)$PRIMARY: ${OPMODES[1]}"
     echo "$EXTERNAL: ${OPMODES[0]}"
-    
+
     xrandr --output $PRIMARY --mode ${OPMODES[1]}
-    xrandr --output $PRIMARY --primary
+    xrandr --output $EXTERNAL --primary
     xrandr --output $EXTERNAL --mode ${OPMODES[0]}
-    xrandr --output $EXTERNAL --$1 $PRIMARY 
+    xrandr --output $EXTERNAL --$1 $PRIMARY
 fi

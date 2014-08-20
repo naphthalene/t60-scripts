@@ -1,0 +1,2 @@
+#!/bin/zsh
+acpi | head -1 | awk '/Discharging/ {printf "- "} /Charging/ {printf "+ "} { print $4,$5 }'
