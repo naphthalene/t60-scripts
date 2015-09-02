@@ -1,8 +1,0 @@
-#!/bin/bash
-
-. /usr/local/bin/virtualenvwrapper.sh
-
-lsvirtualenv | egrep "^fabric$"
-[ $? -eq 0 ] && workon fabric || (echo "No suitable virtualenv" && exit 1)
-
-. env.sh
