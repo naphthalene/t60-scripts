@@ -2,6 +2,7 @@
 
 xset r rate 250 30
 setxkbmap -option "" -layout "us,ru(phonetic)" -option grp:toggle -option grp_led:num :2 &
-capswitch
+$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/capswitch
 synclient RTCornerButton=0
 synclient RBCornerButton=0
+synclient MaxTapTime=0
